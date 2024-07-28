@@ -18,6 +18,7 @@ html {
   background-color: #1b1919;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 h1,
@@ -53,9 +54,9 @@ ol {
 }
 
 .content {
-  display: flex;
-  margin-top: 133px;
-  width: 1140px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1140px;
   gap: 30px;
 }
 
@@ -66,19 +67,18 @@ ol {
 .result__video-container {
   position: relative;
   height: 386px;
-  width: 711px;
+  inline-size: 711px;
 }
 
 .result__video {
   height: 100%;
   width: 100%;
-  inset: 0;
   object-fit: cover;
   object-position: center;
 }
 
 .search-form {
-  margin-top: 16px;
+  margin-block-start: 16px;
   position: relative;
   display: flex;
   gap: 40px;
@@ -94,11 +94,7 @@ ol {
 
 .search-form__label {
   display: flex;
-}
-
-.search-form__label:focus-within {
-  outline: 1px solid #fff;
-  outline-offset: 1px;
+  align-items: center;
 }
 
 .search-form__label:last-child .search-form__label-text {
@@ -112,34 +108,33 @@ ol {
 }
 
 .search-form__textfield {
+  appearance: none;
   font-weight: 400;
   font-size: 18px;
   background-color: transparent;
-  border: none;
+  border-left: none;
+  border-right: none;
   font-family: "Fira Sans Condensed", sans-serif;
   width: 225px;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
-  height: 27px;
-}
-
-.search-form__textfield {
+  min-height: 27px;
   color: white;
-}
-
-.search-form__textfield:active {
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-}
-
-.search-form__textfield:focus {
-  outline: none;
 }
 
 .search-form__label:not(
     .search-form__label:has(.search-form__textfield)
   ):hover {
   text-decoration: underline;
+}
+
+.search-form__label:has(:focus-visible) {
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+
+.search-form__textfield:focus {
+  outline: none;
 }
 
 .search-form__checkbox-list {
@@ -173,7 +168,11 @@ ol {
   color: #fff;
 }
 
-.button:focus-within {
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
   outline: 1px solid #fff;
   outline-offset: -3px;
 }
@@ -204,7 +203,6 @@ ol {
   text-transform: uppercase;
   line-height: 94%;
   margin-top: 2px;
-  margin-left: -1px;
 }
 
 .content__accent {
@@ -212,14 +210,18 @@ ol {
 }
 
 .content__list {
+  width: 415px;
   height: 298px;
   margin-top: 26px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: auto;
   position: relative;
 }
-
 .content__list-item {
+  max-width: 393px;
+  margin-left: 3px;
+}
+
+.content__list-item:not(:first-child) {
   margin-top: 32px;
 }
 
@@ -232,28 +234,33 @@ ol {
   background-color: #545050;
 }
 
+.content__card-link_current:focus {
+  outline: none;
+}
+
+.content__card-link_current:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: -1px;
+}
+
+.content__video-card {
+  display: flex;
+  justify-content: flex-start;
+  max-width: inherit;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .content__card-link:hover {
   text-decoration: underline;
   color: #fff;
   text-underline-offset: 5px;
 }
 
-.content__card-link_current:focus-within {
-  box-shadow: inset 0 0 0 1px #fff;
-}
-
-.content__video-card {
-  display: flex;
-  justify-content: flex-start;
-  width: 394px;
-  height: 107px;
-  position: relative;
-}
-
 .content__video-card-description-container {
-  width: 100%;
-  margin-top: 2px;
-  margin-left: 2px;
+  width: 393px;
+  height: 103px;
 }
 
 .content__video-card-title {
@@ -261,25 +268,30 @@ ol {
   font-size: 30px;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
-  line-height: 100%;
   color: #fff;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content__video-card-description {
   font-weight: 400;
   font-size: 18px;
   font-family: "Oswald", sans-serif;
-  line-height: 16, 2;
   color: #fff;
   margin-top: 3px;
+  max-width: 200px;
+  height: 65px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .content__video-card-thumbnail {
-  height: 103px;
-  width: 194px;
+  max-height: 100px;
+  width: 100%;
   object-fit: cover;
   object-position: center;
-  margin-right: 10px;
   margin-top: 2px;
 }
 
@@ -289,4 +301,3 @@ ol {
   margin-bottom: 2px;
   margin-top: 30px;
 }
-
